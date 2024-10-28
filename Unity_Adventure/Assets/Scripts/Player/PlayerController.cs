@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -19,6 +21,8 @@ public class PlayerController : MonoBehaviour
     public float lookSensitivity; // 회전 민감도
 
     private Vector2 mouseDelta; // inputsystem으로 입력 받는 마우스 델타값
+
+    public event Action onSettingScreen;
 
     private Rigidbody _rigidbody;
     CapsuleCollider _capsuleCollider;
@@ -99,6 +103,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnSetting(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            onSettingScreen?.Invoke();
+        }
+    }
+
     bool IsGrounded()
     {
         Ray[] rays = new Ray[4]
@@ -114,7 +126,6 @@ public class PlayerController : MonoBehaviour
             Debug.DrawRay(rays[i].origin, rays[i].direction * 0.2f, Color.red);
             if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
             {
-                Debug.Log("Jump");
                 return true;
             }
         }
