@@ -4917,7 +4917,9 @@ GameObject:
   - component: {fileID: 501295248943452728}
   - component: {fileID: 501295248944255512}
   - component: {fileID: 501295248945221848}
+  - component: {fileID: 7891565259643124400}
   - component: {fileID: 1883087338931377543}
+  - component: {fileID: 7070162105829161015}
   m_Layer: 0
   m_Name: CampFire
   m_TagString: Untagged
@@ -4991,6 +4993,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &7891565259643124400
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501295248943222296}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &1883087338931377543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5005,3 +5028,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   damageRate: 1
+--- !u!114 &7070162105829161015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501295248943222296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f80feb5ab45eaf48bd95e20d1f5e60c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 46e0cdfcfe3e4754dbbb47dbdb762845, type: 2}
