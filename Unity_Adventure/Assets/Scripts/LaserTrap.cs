@@ -13,7 +13,6 @@ public class LaserTrap : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         if (lineRenderer == null)
         {
-            Debug.LogError("LineRenderer가 게임 오브젝트에 추가되지 않았습니다.");
             return;
         }
 
