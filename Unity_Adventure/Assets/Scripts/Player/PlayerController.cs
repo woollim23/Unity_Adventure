@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
         if ((context.phase == InputActionPhase.Started) && IsGrounded())
         {
             _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            CharacterManager.Instance.Player.condition.UseStamina(jumpPower / 10);
         }
     }
 
@@ -122,6 +123,14 @@ public class PlayerController : MonoBehaviour
         {
             inventory?.Invoke(); // UIInventory.Toggle()
             ToggleCursor();
+        }
+    }
+
+    public void OnSwitchCamera(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            CameraManager.Instance.SwitchMainCamera();
         }
     }
 
