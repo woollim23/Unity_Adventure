@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public interface IDamagaIbe
@@ -43,6 +44,28 @@ public class PlayerCondition : MonoBehaviour, IDamagaIbe
     public void Eat(float amount)
     {
         hunger.Add(amount);
+    }
+
+    public void Doping(float value, float duration)
+    {
+        // 캐릭터 스펙 증가 아이템일 경우 : 현재는 속도 증가 아이템, 호박하나만 있음
+        // TODO : 음식 효과를 여러게 저장할 수 있게 리스트 구현, 데이터 관리 로직 구현
+        StartCoroutine(DopingDuration(value, duration));
+    }
+
+    IEnumerator DopingDuration(float value, float duration)
+    {
+        float tempSpeed = CharacterManager.Instance.Player.controller.moveSpeed;
+        // value 만큼 이속 증가
+        CharacterManager.Instance.Player.controller.moveSpeed += value;
+
+        float startTime = Time.time;
+        while (Time.time < startTime + duration)
+        {
+            yield return null; // 한 프레임 대기
+        }
+
+        CharacterManager.Instance.Player.controller.moveSpeed = tempSpeed;
     }
 
     public void Die()

@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-using UnityEngine;
-using UnityEngine.InputSystem;
-
 public class Equipment : MonoBehaviour
 {
     public Equip curEquip; // 현재 장착 정보

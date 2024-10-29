@@ -57,7 +57,7 @@ public class UIInventory : MonoBehaviour
 
     void ClearSelectedItemWindow()
     {
-        //selectedItem = null;
+        selectedItem = null;
 
         selectedItemName.text = string.Empty;
         selectedItemDescription.text = string.Empty;
@@ -214,6 +214,9 @@ public class UIInventory : MonoBehaviour
                         break;
                     case ConsumableType.Hunger:
                         condition.Eat(selectedItem.consumables[i].value);
+                        break;
+                    case ConsumableType.Doping:
+                        condition.Doping(selectedItem.consumables[i].value, selectedItem.consumables[i].duration);
                         break;
                 }
             }
