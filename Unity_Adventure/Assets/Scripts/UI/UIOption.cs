@@ -9,7 +9,6 @@ public class UIOption : MonoBehaviour
     void Start()
     {
         CharacterManager.Instance.Player.controller.onSettingScreen += SettingOpen;
-        Debug.Log("Start");
     }
 
     // Update is called once per frame
@@ -25,18 +24,7 @@ public class UIOption : MonoBehaviour
 
     void SettingOpen()
     {
-        Debug.Log("SettingOpen()");
         ToggleSetOn();
         settingScreen.SetActive(isSetOn);
-
-        if(isSetOn == true)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        
     }
 }

@@ -19,9 +19,10 @@ public class PlayerController : MonoBehaviour
     public float maxXLook; // 회전 범위 최대값
     private float camCurXRot; // 최종 출력 마우스 델타값
     public float lookSensitivity; // 회전 민감도
-
     private Vector2 mouseDelta; // inputsystem으로 입력 받는 마우스 델타값
+    public bool canLook = true;
 
+    public Action inventory;
     public event Action onSettingScreen;
 
     private Rigidbody _rigidbody;
@@ -46,7 +47,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        CameraLook();
+        if (canLook)
+        {
+            CameraLook();
+        }
     }
 
     private void Move()
@@ -108,6 +112,16 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             onSettingScreen?.Invoke();
+            ToggleCursor();
+        }
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Started)
+        {
+            inventory?.Invoke(); // UIInventory.Toggle()
+            ToggleCursor();
         }
     }
 
@@ -131,5 +145,12 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }

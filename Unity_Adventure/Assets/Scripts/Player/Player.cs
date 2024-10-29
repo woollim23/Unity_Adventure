@@ -7,7 +7,9 @@ public class Player : MonoBehaviour
     public PlayerCondition condition;
 
     public ItemData itemData;
-    public Action Additem;
+    public Action addItem;
+
+    public Transform dropPosition;
 
     private void Awake()
     {
