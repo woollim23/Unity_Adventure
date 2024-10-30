@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3139535614303932001}
   - component: {fileID: 4232285503554803712}
   - component: {fileID: 5631746640247836952}
+  - component: {fileID: 527724064129816038}
   m_Layer: 7
   m_Name: ClimbingWall
   m_TagString: Wall
@@ -119,3 +120,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 956951d1a0abd804bbbcaea545d7a03a, type: 2}
+--- !u!208 &527724064129816038
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7288511444060093529}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.15, z: 0.05}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

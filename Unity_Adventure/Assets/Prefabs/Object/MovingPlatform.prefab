@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7704170629695018972}
   - component: {fileID: 846874567553218705}
   - component: {fileID: 7876392044019083439}
+  - component: {fileID: 7321355205644626741}
   m_Layer: 7
   m_Name: MovingPlatform
   m_TagString: Untagged
@@ -134,3 +135,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: d733e4099b64922419a58124b69ccfbd, type: 2}
+--- !u!208 &7321355205644626741
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240185691407424921}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
