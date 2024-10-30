@@ -21,6 +21,6 @@
 - [도전] 레이저 트랩 : LaserTrap (닿으면 즉사합니다)
 - [도전] 상호작용 가능한 오브젝트 표시(모닥불, 참나무, 플랫폼, 암벽)
 - [도전] 플랫폼발사기 : RocketPlatform (올라가면 5초뒤 앞으로 발사됩니다)
-- [도전] 발전된 AI : 상호작용 Object들에 NavMeshObstacle 추가
+- [도전] 발전된 AI : 상호작용 Object들에 NavMeshObstacle 추가, NavMeshAgent.CalculatePath()로 이동 물가 오브젝트를 만나면 경로 변경
 
 
