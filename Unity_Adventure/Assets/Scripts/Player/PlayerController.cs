@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayerMask;
     public LayerMask wallLayer;
     private bool attatchWall = false;
-    [SerializeField] private float wallRayDistance = 0.1f;  // Raycast 거리
-    [SerializeField] private float climbSpeed = 3f;
+    private float wallRayDistance = 0.5f;  // Raycast 거리
+    private float climbSpeed = 3f;
 
     private float bottomOffset;
 
@@ -101,14 +101,18 @@ public class PlayerController : MonoBehaviour
 
         if (attatchWall)
         {
-            // 벽에 붙어 있을 때 위로 올라갈 수 있도록 설정
+            // 벽에 붙어 있을 때 오르내릴수 있도록 설정
             if (curMovementInput.y > 0) // W 키를 누른 경우
             {
                 _rigidbody.AddForce(Vector2.up * climbSpeed, ForceMode.Impulse);
             }
+            else if (curMovementInput.y < 0) // S 키를 누른 경우
+            {
+                _rigidbody.AddForce(Vector2.down * climbSpeed, ForceMode.Impulse);
+            }
             else
             {
-                _rigidbody.velocity = Vector3.zero; // W 키를 누르지 않은 경우 움직임 멈춤
+                _rigidbody.velocity = Vector3.zero; // 키를 누르지 않은 경우 움직임 멈춤
             }
         }
         else

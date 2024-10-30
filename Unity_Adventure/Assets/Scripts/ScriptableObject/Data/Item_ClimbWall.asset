@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Item_ClimbWall
   m_EditorClassIdentifier: 
   displayName: "\uC554\uBCBD"
-  description: "W\uD0A4\uB97C \uB20C\uB7EC \uBCBD\uC744 \uD0C0\uACE0 \uC624\uB97C
-    \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  description: "W, S\uD0A4\uB97C \uB20C\uB7EC \uBCBD\uC744 \uD0C0\uACE0 \uC624\uB974
+    \uB0B4\uB9B4 \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uBA48\uCD94\uBA74 \uB9E4\uB2EC\uB824
+    \uC788\uC2B5\uB2C8\uB2E4."
   type: 3
   icon: {fileID: 0}
   dropPrefab: {fileID: 0}
