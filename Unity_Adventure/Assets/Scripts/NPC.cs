@@ -6,8 +6,7 @@ public enum AIState
 {
     Idle,
     Wandering, // 돌아다니는 상태
-    Attacking,
-    Fleeing
+    Attacking
 }
 
 public class NPC : MonoBehaviour, IDamagable
@@ -73,9 +72,6 @@ public class NPC : MonoBehaviour, IDamagable
             case AIState.Attacking:
                 AttackingUpdate();
                 break;
-            case AIState.Fleeing:
-                FleeingUpdate();
-                break;
         }
     }
 
@@ -98,10 +94,6 @@ public class NPC : MonoBehaviour, IDamagable
             case AIState.Attacking:
                 // 공격
                 agent.speed = runSpeed; // 좀더 빠르게 
-                agent.isStopped = false;
-                break;
-            case AIState.Fleeing:
-                agent.speed = runSpeed;
                 agent.isStopped = false;
                 break;
         }
@@ -132,23 +124,7 @@ public class NPC : MonoBehaviour, IDamagable
     {
         // 공격중 일때 호출하는 업데이트 함수
 
-        if (playerDistance > attackDistance || !IsPlayerInFieldOfView()) // 플레이어가 멀어졌거나 시야밖일때
-        {
-            agent.isStopped = false;
-            NavMeshPath path = new NavMeshPath();
-            // 플레이어 위치가 갈 수있는 길인지 계산
-            if (agent.CalculatePath(CharacterManager.Instance.Player.transform.position, path))
-            {
-                // 목표 지점, 플레이어 추적
-                agent.SetDestination(CharacterManager.Instance.Player.transform.position);
-            }
-            else
-            {
-                // 추적 포기
-                SetState(AIState.Fleeing);
-            }
-        }
-        else // 플레이어가 가까워졌을 때
+        if (playerDistance < attackDistance && IsPlayerInFieldOfView()) // 플레이어가 가까워져있고 시야 안에 있음
         {
             agent.isStopped = true;
             // 공격 시간 체크
@@ -160,17 +136,33 @@ public class NPC : MonoBehaviour, IDamagable
                 animator.SetTrigger("Attack");
             }
         }
-    }
-
-    void FleeingUpdate()
-    {
-        if (agent.remainingDistance < 0.1f)
-        {
-            agent.SetDestination(GetFleeLocation());
-        }
         else
         {
-            SetState(AIState.Wandering);
+            if(playerDistance < detectDistance) // 플레이어가 탐색 거리 안에있으면
+            {
+                agent.isStopped = false;
+                NavMeshPath path = new NavMeshPath();
+                // 플레이어 위치가 갈 수있는 길인지 계산
+                if (agent.CalculatePath(CharacterManager.Instance.Player.transform.position, path))
+                {
+                    // 목표 지점, 플레이어 추적
+                    agent.SetDestination(CharacterManager.Instance.Player.transform.position);
+                }
+                else
+                {
+                    // 추적 못할 곳이니 멈추고 추적 포기
+                    agent.SetDestination(transform.position);
+                    agent.isStopped = true;
+                    SetState(AIState.Wandering);
+                }
+            }
+            else
+            {
+                // 탐색 거리 밖을 벗어났으니 포기
+                agent.SetDestination(transform.position);
+                agent.isStopped = true;
+                SetState(AIState.Wandering);
+            }
         }
     }
 
@@ -192,25 +184,6 @@ public class NPC : MonoBehaviour, IDamagable
         Vector3 directionToPlayer = CharacterManager.Instance.Player.transform.position - transform.position; // 목표지점에서 내 위치를 빼면 방향이 나옴
         float angle = Vector3.Angle(transform.forward, directionToPlayer); // 정면에서 바라보고있는 위치서 플레이어 위치와의 각을 구함
         return angle < fieldOfView * 0.5f; // 양쪽으로 갈라서 반씩 나눔
-    }
-
-    Vector3 GetFleeLocation()
-    {
-        NavMeshHit hit;
-
-        NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * safeDistance), out hit, maxWanderDistance, NavMesh.AllAreas);
-
-        int i = 0;
-        while (GetDestinationAngle(hit.position) > 90 || playerDistance < safeDistance)
-        {
-
-            NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * safeDistance), out hit, maxWanderDistance, NavMesh.AllAreas);
-            i++;
-            if (i == 30)
-                break;
-        }
-
-        return hit.position;
     }
 
     Vector3 GetWanderLocation()
