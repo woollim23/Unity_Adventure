@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public interface IDamagaIbe
+public interface IDamagable
 {
     void TakePhysicalDamage(int damage);
 }
 
-public class PlayerCondition : MonoBehaviour, IDamagaIbe
+public class PlayerCondition : MonoBehaviour, IDamagable
 {
     public UICondition uiCondition;
 
