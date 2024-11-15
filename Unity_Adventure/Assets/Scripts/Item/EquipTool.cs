@@ -25,6 +25,7 @@ public class EquipTool : Equip
                 attacking = true;
                 animator.SetTrigger("Attack");
                 Invoke("OnCanAttack", attackRate);
+                Debug.Log("OnHit");
             }
         }
     }
@@ -36,6 +37,7 @@ public class EquipTool : Equip
 
     public void OnHit()
     {
+        Debug.Log("OnHit");
         Ray ray = _camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
